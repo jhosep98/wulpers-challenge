@@ -1,9 +1,15 @@
+import styled from "styled-components";
+
+const AppContainer = styled.div`
+  width: 320px;
+  height: 640px;
+  background-color: #F9F9F9;
+`;
 
 function App() {
   return (
-    <div>
-      <h1>Wulpers-challenge</h1>
-    </div>
+    <AppContainer>
+    </AppContainer>
   );
 }
 
