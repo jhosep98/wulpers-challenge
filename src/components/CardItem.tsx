@@ -9,6 +9,7 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
+import ReactPaginate from "react-paginate";
 
 import { Character } from "../interfaces/interfaces";
 
@@ -19,9 +20,39 @@ type CharactersProps = {
 
 const CardItemContainer = styled.div`
   width: 100%;
+  height: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .paginationBttns {
+    width: 80%;
+    height: 40px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding-left: 0px;
+    margin-top: auto;
+  }
+
+  .paginationBttns a {
+    padding: 7px;
+    margin: 5px;
+    border: 1px solid #3f51b5;
+    border-radius: 5px;
+    color: #3f51b5;
+    cursor: pointer;
+  }
+
+  .paginationBttns a:hover {
+    color: white;
+    background-color: #3f51b5;
+  }
+
+  .paginationActive a {
+    color: white;
+    background-color: #3f51b5;
+  }
 `;
 
 const CustomCardContent = styled(CardContent)`
@@ -121,9 +152,28 @@ const CardItem = (props: CharactersProps) => {
       );
     });
 
+  const pageCount = Math.ceil(characters.length / characterPerPage);
+
+  const changePage = ({ selected }: { selected: any }) => {
+    setPageNumber(selected);
+  };
+
   return (
     <CardItemContainer>
       {loading ? <CircularProgress /> : displayCharacters}
+      <ReactPaginate
+        activeClassName={"paginationActive"}
+        containerClassName={"paginationBttns"}
+        disabledClassName={"paginationDisabled"}
+        marginPagesDisplayed={1}
+        nextLabel={"Next"}
+        nextLinkClassName={"nextBttn"}
+        onPageChange={changePage}
+        pageCount={pageCount}
+        pageRangeDisplayed={0}
+        previousLabel={"Previous"}
+        previousLinkClassName={"previousBttn"}
+      />
     </CardItemContainer>
   );
 };
