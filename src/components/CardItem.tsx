@@ -71,7 +71,19 @@ const TitleContainer = styled.div`
 const Status = styled.span`
   height: 12px;
   width: 12px;
-  background-color: #bbb;
+  background-color: ${(props: { status: any }) => {
+    switch (props.status) {
+      case "Alive":
+        return "#05ff00";
+      case "Dead":
+        return "#FD0000";
+      case "unknown":
+        return "#C4C4C4";
+
+      default:
+        return "#C4C4C4";
+    }
+  }};
   border-radius: 50%;
   display: inline-block;
   margin-right: 0.2rem;
@@ -135,7 +147,7 @@ const CardItem = (props: CharactersProps) => {
           <div className={classes.details}>
             <CustomCardContent>
               <TitleContainer>
-                <Status />
+                <Status status={character.status} />
                 <Typography variant="subtitle2">{character.name}</Typography>
               </TitleContainer>
               <CustomTypography variant="body2">Specie:</CustomTypography>
