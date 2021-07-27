@@ -6,7 +6,7 @@ interface Location {
   name: string;
 }
 
-interface Character {
+export interface Character {
   image: string;
   status: string;
   name: string;

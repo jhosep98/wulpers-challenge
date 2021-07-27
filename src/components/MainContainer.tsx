@@ -1,30 +1,15 @@
-import { useQuery, gql } from "@apollo/client";
-import { Characters } from "../interfaces/interfaces";
+import { useGetCharacters } from "../graphql/queries";
 import CardItem from "./CardItem";
 
-const GET_CHARACTER_QUERY = gql`
-  query {
-    characters(filter: { name: "rick" }) {
-      results {
-        image
-        status
-        name
-        species
-        origin {
-          name 
-        }
-        location {
-          name 
-        }
-      }
-    }
-  }
-`;
-
 const MainContainer = () => {
-  const { loading, data } = useQuery<Characters>(GET_CHARACTER_QUERY);
- 
-  return <>{loading ? <p>Loading</p> : <CardItem />}</>;
+  const characters = useGetCharacters();
+
+  return (
+    <CardItem
+      characters={characters?.data || []}
+      loading={characters?.loading || false}
+    />
+  );
 };
 
 export default MainContainer;

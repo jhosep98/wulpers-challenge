@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import CssBaseline from "@material-ui/core/CssBaseline";
+
 import NavBar from "./components/NavBar";
 import MainContainer from "./components/MainContainer";
 
@@ -10,10 +12,13 @@ const AppContainer = styled.div`
 
 function App() {
   return (
-    <AppContainer>
-      <NavBar />
-      <MainContainer />
-    </AppContainer>
+    <>
+      <CssBaseline />
+      <AppContainer>
+        <NavBar />
+        <MainContainer />
+      </AppContainer>
+    </>
   );
 }
 
