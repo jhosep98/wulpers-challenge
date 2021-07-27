@@ -7,14 +7,16 @@ interface Location {
 }
 
 export interface Character {
+  id: number;
+  name: string;
   image: string;
   status: string;
-  name: string;
+  gender: string;
   species: string;
   origin: Origin;
   location: Location;
 }
 
 export interface Characters {
-  results: Character[]
+  results: Character[];
 }

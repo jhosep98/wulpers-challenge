@@ -3,12 +3,14 @@ import { Character } from "../interfaces/interfaces";
 
 export const GET_CHARACTERS_QUERY = gql`
   query {
-    characters(filter: { name: "rick" }) {
+    characters(page: 1, filter: { name: "rick" }) {
       results {
+        id
+        name
         image
         status
-        name
         species
+        gender
         origin {
           name
         }
