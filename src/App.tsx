@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import NavBar from "./components/NavBar";
 
 const AppContainer = styled.div`
   width: 320px;
@@ -9,6 +10,7 @@ const AppContainer = styled.div`
 function App() {
   return (
     <AppContainer>
+      <NavBar />
     </AppContainer>
   );
 }
