@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import {
@@ -6,6 +7,8 @@ import {
   Theme,
   makeStyles,
 } from "@material-ui/core/styles";
+import { useContext } from "react";
+import { SearchContext } from "../context/SearchContext";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,21 +46,35 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Search = () => {
   const classes = useStyles();
+  const [searchInput, setSearchInput] = useState("");
+  const { setSearchValue } = useContext(SearchContext);
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+
+    setSearchValue(searchInput);
+    setTimeout(() => {
+      setSearchInput("");
+    }, 1000);
+  };
   return (
     <>
       <div className={classes.search}>
         <div className={classes.searchIcon}>
           <SearchIcon />
         </div>
-        <InputBase
-          placeholder="Search Name"
-          classes={{
-            root: classes.inputRoot,
-            input: classes.inputInput,
-          }}
-          inputProps={{ "aria-label": "search" }}
-        />
+        <form onSubmit={handleSubmit}>
+          <InputBase
+            placeholder="Search Name"
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+            inputProps={{ "aria-label": "search" }}
+            onChange={(e) => setSearchInput(e.target.value)}
+            value={searchInput}
+          />
+        </form>
       </div>
     </>
   );
