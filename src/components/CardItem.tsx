@@ -18,6 +18,12 @@ type CharactersProps = {
   loading: boolean;
 };
 
+const STATUS_COLOR = {
+  Alive: "#05ff00",
+  Dead: "#FD0000",
+  unknown: "#C4C4C4"
+}
+
 const CardItemContainer = styled.div`
   width: 100%;
   height: 90%;
@@ -71,19 +77,7 @@ const TitleContainer = styled.div`
 const Status = styled.span`
   height: 12px;
   width: 12px;
-  background-color: ${(props: { status: any }) => {
-    switch (props.status) {
-      case "Alive":
-        return "#05ff00";
-      case "Dead":
-        return "#FD0000";
-      case "unknown":
-        return "#C4C4C4";
-
-      default:
-        return "#C4C4C4";
-    }
-  }};
+  background-color: ${(props: { status: any }) => STATUS_COLOR[props.status] || "#C4C4C4" };
   border-radius: 50%;
   display: inline-block;
   margin-right: 0.2rem;
@@ -121,6 +115,9 @@ const useStyles = makeStyles(() =>
     status: {
       backgroundColor: "#fedf",
     },
+    circularProgress:{
+      marginTop: "3rem",
+    }
   })
 );
 
@@ -172,7 +169,7 @@ const CardItem = (props: CharactersProps) => {
 
   return (
     <CardItemContainer>
-      {loading ? <CircularProgress /> : displayCharacters}
+      {loading ? <CircularProgress className={classes.circularProgress}/> : displayCharacters}
       <ReactPaginate
         activeClassName={"paginationActive"}
         containerClassName={"paginationBttns"}

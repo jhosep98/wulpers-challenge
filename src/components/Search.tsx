@@ -57,6 +57,15 @@ const Search = () => {
       setSearchInput("");
     }, 1000);
   };
+
+  const onChangeSearch = (e) => {
+    if(e.target.value.length >= 3){
+      setSearchInput(e.target.value);
+      setSearchValue(e.target.value);
+    }
+    setSearchInput(e.target.value);
+  }
+
   return (
     <>
       <div className={classes.search}>
@@ -71,7 +80,7 @@ const Search = () => {
               input: classes.inputInput,
             }}
             inputProps={{ "aria-label": "search" }}
-            onChange={(e) => setSearchInput(e.target.value)}
+            onChange={onChangeSearch}
             value={searchInput}
           />
         </form>
